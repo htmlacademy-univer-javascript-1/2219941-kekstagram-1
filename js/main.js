@@ -7,5 +7,5 @@ const getRandomIntNumber = (min,max) => {
 };
 getRandomIntNumber();
 
-const lineLengthIsCorrect = (line, maxLength) => line.length <= maxLength;
-lineLengthIsCorrect();
+const checkLineLength = (line, maxLength) => line.length <= maxLength;
+checkLineLength();
