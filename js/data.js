@@ -65,4 +65,5 @@ const createPicture = () => ({
 });
 
 const differentPictures = Array.from({length: POSTS_NUMBER}, createPicture);
-differentPictures.reverse();
+
+export {differentPictures};
