@@ -1,4 +1,4 @@
-import {getRandomIntNumber} from './util';
+import {getRandomIntNumber} from './util.js';
 
 const DESCRIPTIONS = [
   'What a great time!',
