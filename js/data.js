@@ -64,6 +64,7 @@ const createPicture = () => ({
   comments: Array.from({length: getRandomIntNumber(1, NAMES.length)}, createComment)
 });
 
-const differentPictures = Array.from({length: POSTS_NUMBER}, createPicture);
+const generatedPictures = Array.from({length: POSTS_NUMBER}, createPicture);
+console.log(generatedPictures);
 
-export {differentPictures};
+export {generatedPictures};
