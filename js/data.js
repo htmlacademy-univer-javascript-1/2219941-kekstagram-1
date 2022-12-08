@@ -65,6 +65,5 @@ const createPicture = () => ({
 });
 
 const generatedPictures = Array.from({length: POSTS_NUMBER}, createPicture);
-console.log(generatedPictures);
 
 export {generatedPictures};
