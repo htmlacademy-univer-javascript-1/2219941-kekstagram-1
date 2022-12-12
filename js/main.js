@@ -1,3 +1,4 @@
-import {differentPictures} from './data.js';
+import {generatedPictures} from './data.js';
+import {renderPictures} from './pictures.js';
 
-differentPictures.reverse();
+renderPictures(generatedPictures);
