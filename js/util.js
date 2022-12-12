@@ -7,4 +7,6 @@ const getRandomIntNumber = (min,max) => {
 
 const checkLineLength = (line, maxLength) => line.length <= maxLength;
 
-export {getRandomIntNumber, checkLineLength};
+const isEscape = (evt) => evt.key === 'Escape';
+
+export {getRandomIntNumber, checkLineLength, isEscape};
