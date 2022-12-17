@@ -33,7 +33,7 @@ const FIRST_ID = 1;
 const ARRAY_ID_FIXER = 1;
 const POSTS_NUMBER = 25;
 const AVATARS_NUMBER = 6;
-const COMMENTERS_NUMBER = 1000;
+const COMMENTERS_NUMBER = 30;
 const MIN_LIKES = 15;
 const MAX_LIKES = 200;
 
@@ -61,7 +61,7 @@ const createPicture = () => ({
   url: `photos/${getUniqueId('photoIdList')}.jpg`,
   description: DESCRIPTIONS[getRandomIntNumber(FIRST_ARRAY_INDEX, DESCRIPTIONS.length - ARRAY_ID_FIXER)],
   likes: getRandomIntNumber(MIN_LIKES, MAX_LIKES),
-  comments: Array.from({length: getRandomIntNumber(1, NAMES.length)}, createComment)
+  comments: Array.from({length: getRandomIntNumber(FIRST_ID, COMMENTERS_NUMBER)}, createComment)
 });
 
 const generatedPictures = Array.from({length: POSTS_NUMBER}, createPicture);

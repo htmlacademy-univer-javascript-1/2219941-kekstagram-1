@@ -9,4 +9,11 @@ const checkLineLength = (line, maxLength) => line.length <= maxLength;
 
 const isEscape = (evt) => evt.key === 'Escape';
 
-export {getRandomIntNumber, checkLineLength, isEscape};
+const changeWord = (firstForm, secondForm, marker) => {
+  if (marker % 10 === 1) {
+    return firstForm;
+  }
+  return secondForm;
+};
+
+export {getRandomIntNumber, checkLineLength, isEscape, changeWord};
