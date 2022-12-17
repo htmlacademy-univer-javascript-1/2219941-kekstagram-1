@@ -55,9 +55,9 @@ const alternateCommentSection = (commentsArray) => {
   const currentCommentsCount = commentSection.children.length;
   const commentsLimit = currentCommentsCount + MAX_COMMENTS_SHOWN >= commentsAmount ? commentsAmount : currentCommentsCount + MAX_COMMENTS_SHOWN;
   commentsCountText.textContent = `${commentsLimit} из ${commentsAmount} ${changeWord('комментария', 'комментариев', commentsAmount)}`;
-  for (let i = currentCommentsCount; i < commentsLimit; i++) {
-    commentsFragment.appendChild(commentsArray[i]);
-  }
+  commentsArray.slice(currentCommentsCount, commentsLimit).forEach((comment) => {
+    commentsFragment.appendChild(comment);
+  });
   commentSection.appendChild(commentsFragment);
 
   if (currentCommentsCount + MAX_COMMENTS_SHOWN >= commentsAmount) {
