@@ -1,6 +1,5 @@
 import {isEscape} from './util.js';
 import {addHashtagValidator} from './hashtags.js';
-import {addDescValidator} from './image-desc.js';
 
 const bodyElement = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -35,7 +34,6 @@ const onUploadChangeHandler = () => {
   openUploadForm();
   uploadCloseButton.addEventListener('click', onCloseUploadButtonClick);
   document.addEventListener('keydown', onDocumentEscapeKeyDown);
-  addDescValidator();
   addHashtagValidator();
 };
 
