@@ -1,5 +1,7 @@
 import {isEscape} from './util.js';
 import {addHashtagValidator} from './hashtags.js';
+import {addZoomHandler, removeZoomHandler, resetZoom} from './zoom.js';
+import {resetEffects} from './effects.js';
 
 const bodyElement = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -10,12 +12,16 @@ const imgUploadControl = imgUploadForm.querySelector('#upload-file');
 const closeUploadForm = () => {
   imgUploadOverlay.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
+  removeZoomHandler();
+  resetEffects();
+  resetZoom();
   imgUploadForm.reset();
 };
 
 const openUploadForm = () => {
   imgUploadOverlay.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
+  addZoomHandler();
 };
 
 const onDocumentEscapeKeyDown = (evt) => {

@@ -68,7 +68,7 @@ const alternateCommentSection = (commentsArray) => {
 };
 
 const addPictureClickHandler = (picture, newPictureData) => {
-  picture.addEventListener('click', () => {
+  const onPictureClick = () => {
     const commentsArray = createCommentsArray(newPictureData);
     const addLoadingHandler = () => {
       alternateCommentSection(commentsArray);
@@ -89,7 +89,9 @@ const addPictureClickHandler = (picture, newPictureData) => {
     commentsLoader.addEventListener('click', addLoadingHandler);
     closeBigPictureButton.addEventListener('click', onCloseBigPictureButtonClick);
     document.addEventListener('keydown', onDocumentEscapeKeyDown);
-  });
+  };
+
+  picture.addEventListener('click', onPictureClick);
 };
 
 export {addPictureClickHandler};
