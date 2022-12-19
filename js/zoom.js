@@ -12,7 +12,7 @@ const picture = imgUploadForm.querySelector('.img-upload__preview');
 const changeValue = (newValue) => {
   zoomValue.value = `${newValue}%`;
   picture.style.transform = `scale(${newValue/100})`;
-}
+};
 
 const onZoomButtonsClick = (evt) => {
   const target = evt.target;
