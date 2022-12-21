@@ -5,6 +5,7 @@ const MAX_COMMENTS_SHOWN = 5;
 const bodyElement = document.querySelector('body');
 const bigPicture = document.querySelector('.big-picture');
 const closeBigPictureButton = bigPicture.querySelector('.big-picture__cancel');
+
 const commentTemplate = bigPicture.querySelector('.social__comment').cloneNode(true);
 const commentSection = bigPicture.querySelector('.social__comments');
 const commentsCountText = bigPicture.querySelector('.social__comment-count');
@@ -67,31 +68,27 @@ const alternateCommentSection = (commentsArray) => {
   }
 };
 
-const addPictureClickHandler = (picture, newPictureData) => {
-  const onPictureClick = () => {
-    const commentsArray = createCommentsArray(newPictureData);
-    const addLoadingHandler = () => {
-      alternateCommentSection(commentsArray);
-    };
-    const onDocumentEscapeKeyDown = (evt) => {
-      if (isEscape(evt)) {
-        closeBigPicture(addLoadingHandler, onDocumentEscapeKeyDown);
-      }
-    };
-    const onCloseBigPictureButtonClick = () => {
-      closeBigPicture(addLoadingHandler, onDocumentEscapeKeyDown);
-    };
-
-    openBigPicture();
-    alternateBigPictureData(newPictureData);
+const onPictureClick = (pictureData) => {
+  const commentsArray = createCommentsArray(pictureData);
+  const onLoadingButton = () => {
     alternateCommentSection(commentsArray);
-
-    commentsLoader.addEventListener('click', addLoadingHandler);
-    closeBigPictureButton.addEventListener('click', onCloseBigPictureButtonClick);
-    document.addEventListener('keydown', onDocumentEscapeKeyDown);
+  };
+  const onDocumentEscapeKeyDown = (evt) => {
+    if (isEscape(evt)) {
+      closeBigPicture(onLoadingButton, onDocumentEscapeKeyDown);
+    }
+  };
+  const onCloseBigPictureButtonClick = () => {
+    closeBigPicture(onLoadingButton, onDocumentEscapeKeyDown);
   };
 
-  picture.addEventListener('click', onPictureClick);
+  openBigPicture();
+  alternateBigPictureData(pictureData);
+  alternateCommentSection(commentsArray);
+
+  commentsLoader.addEventListener('click', onLoadingButton);
+  closeBigPictureButton.addEventListener('click', onCloseBigPictureButtonClick);
+  document.addEventListener('keydown', onDocumentEscapeKeyDown);
 };
 
-export {addPictureClickHandler};
+export {onPictureClick};

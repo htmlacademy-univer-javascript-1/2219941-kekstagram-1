@@ -1,4 +1,4 @@
-import {addPictureClickHandler} from './big-picture.js';
+import {onPictureClick} from './big-picture.js';
 
 const picturesPool = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
@@ -11,7 +11,9 @@ const renderPicture = (picture) => {
   newPicture.querySelector('.picture__likes').textContent = picture.likes;
   newPicture.querySelector('.picture__comments').textContent = picture.comments.length;
 
-  addPictureClickHandler(newPicture, picture);
+  newPicture.addEventListener('click', () => {
+    onPictureClick(picture);
+  });
   return newPicture;
 };
 
