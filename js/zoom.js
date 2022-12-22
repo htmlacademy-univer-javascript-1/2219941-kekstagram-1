@@ -4,10 +4,11 @@ const MIN_VALUE = 25;
 const MAX_VALUE = 100;
 const RADIX = 10;
 
+
 const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadScale = imgUploadForm.querySelector('.img-upload__scale');
 const zoomValue = imgUploadScale.querySelector('.scale__control--value');
-const picture = imgUploadForm.querySelector('.img-upload__preview');
+const picture = imgUploadForm.querySelector('.img-upload__preview').querySelector('img');
 
 const changeValue = (newValue) => {
   zoomValue.value = `${newValue}%`;
