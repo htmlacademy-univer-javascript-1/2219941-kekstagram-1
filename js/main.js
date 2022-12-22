@@ -2,12 +2,14 @@ import {renderPictures} from './pictures.js';
 import {addFormEventsHandler} from './form.js';
 import {addEffectEventHandlers} from './effects.js';
 import {sendRequest} from './fetch.js';
+import {connectFilters} from './filters.js';
 
 let pictures = [];
 
 const onSuccess = (data) => {
   pictures = data.slice();
   renderPictures(pictures);
+  connectFilters();
   addFormEventsHandler();
   addEffectEventHandlers();
 };
@@ -30,3 +32,5 @@ const onFail = () => {
 };
 
 sendRequest(onSuccess, onFail, 'GET');
+
+export {pictures};

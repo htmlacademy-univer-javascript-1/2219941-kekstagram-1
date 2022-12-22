@@ -1,4 +1,8 @@
+import {throttle, debounce} from './util.js';
+
 const DEFAULT_EFFECT_LEVEL = 100;
+const SLIDER_UPDATE_DELAY = 100;
+const EFFECT_CHANGE_DELAY = 200;
 
 const imgUploadForm = document.querySelector('.img-upload__form');
 const effectLevelChanger = imgUploadForm.querySelector('.img-upload__effect-level');
@@ -104,19 +108,19 @@ const changeEffect = (newEffect) => {
   picture.style.filter = effects[currentEffect]['open']();
 };
 
-const onSliderUpdate = () => {
+const onSliderUpdate = throttle(() => {
   effectLevelValue.value = effectLevelSlider.noUiSlider.get();
   if (currentEffect !== 'none') {
     picture.style.filter = effects[currentEffect]['update']();
   }
-};
+}, SLIDER_UPDATE_DELAY);
 
-const onEffectsListClick = (evt) => {
+const onEffectsListClick = debounce((evt) => {
   const target = evt.target;
   if (target.classList.contains('effects__radio') && currentEffect !== target.value) {
     changeEffect(target.value);
   }
-};
+}, EFFECT_CHANGE_DELAY);
 
 const addEffectEventHandlers = () => {
   effectLevelSlider.noUiSlider.on('update', onSliderUpdate);

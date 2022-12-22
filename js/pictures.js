@@ -17,6 +17,11 @@ const renderPicture = (picture) => {
   return newPicture;
 };
 
+const removePictures = () => {
+  const uselessPictures = picturesPool.querySelectorAll('.picture');
+  uselessPictures.forEach((picture) => picturesPool.removeChild(picture));
+};
+
 const renderPictures = (pictures) => {
   pictures.forEach((picture) => {
     fragment.appendChild(renderPicture(picture));
@@ -24,4 +29,4 @@ const renderPictures = (pictures) => {
   picturesPool.appendChild(fragment);
 };
 
-export {renderPictures};
+export {renderPictures, removePictures};

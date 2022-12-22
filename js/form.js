@@ -9,6 +9,7 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const imgUploadOverlay = imgUploadForm.querySelector('.img-upload__overlay');
 const imgUploadControl = imgUploadForm.querySelector('#upload-file');
 const uploadCloseButton = imgUploadForm.querySelector('#upload-cancel');
+const submitButton = imgUploadForm.querySelector('.img-upload__submit');
 
 const successMessage =  document.querySelector('#success').content.querySelector('.success').cloneNode(true);
 const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
@@ -106,9 +107,20 @@ const appendMessage = (message) => {
   bodyElement.appendChild(message);
 };
 
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Публикую...';
+};
+
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
+};
+
 const onSuccess = () => {
   closeUploadForm();
   document.removeEventListener('keydown', onDocumentEscapeKeyDown);
+  unblockSubmitButton();
 
   successMessage.classList.remove('hidden');
   document.addEventListener('click', onSuccessDocumentClick);
@@ -118,6 +130,7 @@ const onSuccess = () => {
 const onError = () => {
   imgUploadOverlay.classList.add('hidden');
   document.removeEventListener('keydown', onDocumentEscapeKeyDown,);
+  unblockSubmitButton();
 
   errorMessage.classList.remove('hidden');
   document.addEventListener('click', onErrorDocumentClick);
@@ -126,6 +139,7 @@ const onError = () => {
 
 const onUploadFormSubmit = (evt) => {
   evt.preventDefault();
+  blockSubmitButton();
   sendRequest(onSuccess, onError, 'POST', new FormData(imgUploadForm));
 };
 
