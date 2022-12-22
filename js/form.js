@@ -3,6 +3,7 @@ import {addHashtagValidator} from './hashtags.js';
 import {addZoomHandler, removeZoomHandler, resetZoom} from './zoom.js';
 import {resetEffects} from './effects.js';
 import {sendRequest} from './fetch.js';
+import {addUploadedPhoto} from './picture-upload.js';
 
 const bodyElement = document.querySelector('body');
 const imgUploadForm = document.querySelector('.img-upload__form');
@@ -44,6 +45,7 @@ const onCloseUploadButtonClick = () => {
 };
 
 const onUploadChangeHandler = () => {
+  addUploadedPhoto();
   openUploadForm();
   uploadCloseButton.addEventListener('click', onCloseUploadButtonClick);
   document.addEventListener('keydown', onDocumentEscapeKeyDown);
