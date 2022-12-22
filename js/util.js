@@ -1,4 +1,5 @@
 const DIVIDER_TO_GET_UNITS = 10;
+const DEFAULT_TIMEOUT_DELAY = 500;
 
 const checkLineLength = (line, maxLength) => line.length <= maxLength;
 
@@ -11,7 +12,7 @@ const changeWord = (firstForm, secondForm, marker) => {
   return secondForm;
 };
 
-const debounce = (callback, timeoutDelay = 500) => {
+const debounce = (callback, timeoutDelay = DEFAULT_TIMEOUT_DELAY) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
@@ -31,9 +32,9 @@ const throttle = (callback, delayBetweenFrames) => {
 };
 
 const shuffleArray = (array) => {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+  for (let firstElement = array.length - 1; firstElement > 0; firstElement--) {
+    const secondElement = Math.floor(Math.random() * (firstElement + 1));
+    [array[firstElement], array[secondElement]] = [array[secondElement], array[firstElement]];
   }
   return array;
 };
