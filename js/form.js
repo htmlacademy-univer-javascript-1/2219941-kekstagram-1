@@ -1,5 +1,5 @@
 import {isEscape} from './util.js';
-import {addHashtagValidator} from './hashtags.js';
+import {addHashtagValidator, makeHashtagValidation} from './hashtags.js';
 import {addZoomHandler, removeZoomHandler, resetZoom} from './zoom.js';
 import {resetEffects} from './effects.js';
 import {sendRequest} from './fetch.js';
@@ -24,6 +24,7 @@ const closeUploadForm = () => {
   resetEffects();
   resetZoom();
   imgUploadFormElement.reset();
+  makeHashtagValidation();
 };
 
 const openUploadForm = () => {

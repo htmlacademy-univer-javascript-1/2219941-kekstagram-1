@@ -15,7 +15,7 @@ const pristine = new Pristine(imgUploadFormElement, {
   errorTextClass: 'hashtags__error-text'
 });
 
-let errorMessageText = 'Хэштег некорректного формата';
+let errorMessageText = '';
 
 const setErrorMessage = () => errorMessageText;
 
@@ -75,6 +75,10 @@ const validateHashtag = (value) => {
 
 pristine.addValidator(inputHashtagsElement, validateHashtag, setErrorMessage);
 
+const makeHashtagValidation = () => {
+  pristine.validate();
+};
+
 const onHashtagInput = () => {
   submitButtonElement.disabled = !pristine.validate();
 };
@@ -83,4 +87,4 @@ const addHashtagValidator = () => {
   inputHashtagsElement.addEventListener('input', onHashtagInput);
 };
 
-export {addHashtagValidator};
+export {addHashtagValidator, makeHashtagValidation};
