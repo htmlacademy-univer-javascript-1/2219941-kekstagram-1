@@ -1,8 +1,6 @@
 const DIVIDER_TO_GET_UNITS = 10;
 const DEFAULT_TIMEOUT_DELAY = 500;
 
-const checkLineLength = (line, maxLength) => line.length <= maxLength;
-
 const isEscape = (evt) => evt.key === 'Escape';
 
 const changeWord = (firstForm, secondForm, marker) => {
@@ -39,4 +37,4 @@ const shuffleArray = (array) => {
   return array;
 };
 
-export {checkLineLength, isEscape, changeWord, debounce, throttle, shuffleArray};
+export {isEscape, changeWord, debounce, throttle, shuffleArray};
