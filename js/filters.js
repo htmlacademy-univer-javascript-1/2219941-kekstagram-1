@@ -5,11 +5,11 @@ import {renderPictures, removePictures} from './pictures.js';
 const FILTERS_CLICK_DELAY = 500;
 const RANDOM_PICTURES_COUNT = 10;
 
-const filtersForm = document.querySelector('.img-filters');
+const filtersFormElement = document.querySelector('.img-filters');
 
 const filterFunctions = {
   'filter-default': () => pictures.slice(),
-  'filter-random': () => shuffleArray(pictures).slice(0, RANDOM_PICTURES_COUNT),
+  'filter-random': () => shuffleArray(pictures.slice()).slice(0, RANDOM_PICTURES_COUNT),
   'filter-discussed': () => pictures.slice().sort((firstPicture, secondPicture) =>
     secondPicture.comments.length - firstPicture.comments.length)
 };
@@ -17,7 +17,7 @@ const filterFunctions = {
 const onFiltersFormClick = debounce((evt) => {
   if (evt.target.tagName === 'BUTTON') {
     const targetedFilter = evt.target;
-    const selectedFilter = filtersForm.querySelector('.img-filters__button--active');
+    const selectedFilter = filtersFormElement.querySelector('.img-filters__button--active');
     if (selectedFilter) {
       selectedFilter.classList.remove('img-filters__button--active');
     }
@@ -28,8 +28,8 @@ const onFiltersFormClick = debounce((evt) => {
 }, FILTERS_CLICK_DELAY);
 
 const connectFilters = () => {
-  filtersForm.classList.remove('img-filters--inactive');
-  filtersForm.addEventListener('click', onFiltersFormClick);
+  filtersFormElement.classList.remove('img-filters--inactive');
+  filtersFormElement.addEventListener('click', onFiltersFormClick);
 };
 
 export {connectFilters};

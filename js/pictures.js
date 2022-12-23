@@ -1,12 +1,13 @@
 import {onPictureClick} from './big-picture.js';
+import {connectFilters} from './filters.js';
 
-const picturesPool = document.querySelector('.pictures');
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const picturesPoolElement = document.querySelector('.pictures');
+const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
 
 const fragment = document.createDocumentFragment();
 
 const renderPicture = (picture) => {
-  const newPicture = pictureTemplate.cloneNode(true);
+  const newPicture = pictureTemplateElement.cloneNode(true);
   newPicture.querySelector('.picture__img').src = picture.url;
   newPicture.querySelector('.picture__likes').textContent = picture.likes;
   newPicture.querySelector('.picture__comments').textContent = picture.comments.length;
@@ -18,15 +19,16 @@ const renderPicture = (picture) => {
 };
 
 const removePictures = () => {
-  const uselessPictures = picturesPool.querySelectorAll('.picture');
-  uselessPictures.forEach((picture) => picturesPool.removeChild(picture));
+  const uselessPictures = picturesPoolElement.querySelectorAll('.picture');
+  uselessPictures.forEach((picture) => picturesPoolElement.removeChild(picture));
 };
 
 const renderPictures = (pictures) => {
   pictures.forEach((picture) => {
     fragment.appendChild(renderPicture(picture));
   });
-  picturesPool.appendChild(fragment);
+  picturesPoolElement.appendChild(fragment);
+  connectFilters();
 };
 
 export {renderPictures, removePictures};

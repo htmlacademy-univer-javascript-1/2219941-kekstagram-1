@@ -4,13 +4,13 @@ const DEFAULT_EFFECT_LEVEL = 100;
 const SLIDER_UPDATE_DELAY = 100;
 const EFFECT_CHANGE_DELAY = 200;
 
-const imgUploadForm = document.querySelector('.img-upload__form');
-const effectLevelChanger = imgUploadForm.querySelector('.img-upload__effect-level');
-const effectLevelSlider = effectLevelChanger.querySelector('.effect-level__slider');
-const effectLevelValue = effectLevelChanger.querySelector('.effect-level__value');
-const effectsList = imgUploadForm.querySelector('.effects__list');
-const picturePreview = imgUploadForm.querySelector('.img-upload__preview');
-const picture = picturePreview.querySelector('img');
+const imgUploadFormElement = document.querySelector('.img-upload__form');
+const effectLevelChangerElement = imgUploadFormElement.querySelector('.img-upload__effect-level');
+const effectLevelSliderElement = effectLevelChangerElement.querySelector('.effect-level__slider');
+const effectLevelValueElement = effectLevelChangerElement.querySelector('.effect-level__value');
+const effectsListElement = imgUploadFormElement.querySelector('.effects__list');
+const picturePreviewElement = imgUploadFormElement.querySelector('.img-upload__preview');
+const pictureElement = picturePreviewElement.querySelector('img');
 
 const Slider = {
   MIN: 0,
@@ -28,23 +28,25 @@ const createOptions = () => ({
   connect: 'lower'
 });
 
-const changeFilterString = (filterName, additionalParameter) => `${filterName}(${effectLevelValue.value}${additionalParameter})`;
+noUiSlider.create(effectLevelSliderElement, createOptions());
+
+const changeFilterString = (filterName, additionalParameter) => `${filterName}(${effectLevelValueElement.value}${additionalParameter})`;
 
 const openEffect = (effectValues) => {
-  effectLevelChanger.classList.remove('visually-hidden');
+  effectLevelChangerElement.classList.remove('visually-hidden');
   Slider.MIN = effectValues.min;
   Slider.MAX = effectValues.max;
   Slider.STEP = effectValues.step;
-  effectLevelSlider.noUiSlider.updateOptions(createOptions());
-  effectLevelValue.value = effectValues.max;
+  effectLevelSliderElement.noUiSlider.updateOptions(createOptions());
+  effectLevelValueElement.value = effectValues.max;
   return changeFilterString(effectValues.filter);
 };
 
 const effects = {
   none: {
     open : () => {
-      effectLevelChanger.classList.add('visually-hidden');
-      picture.style.removeProperty('filter');
+      effectLevelChangerElement.classList.add('visually-hidden');
+      pictureElement.style.removeProperty('filter');
       return 'none';
     }
   },
@@ -96,22 +98,20 @@ const effects = {
 };
 
 let currentEffect = 'none';
-effectLevelValue.value = DEFAULT_EFFECT_LEVEL;
-effectLevelChanger.classList.add('visually-hidden');
-
-noUiSlider.create(effectLevelSlider, createOptions());
+effectLevelValueElement.value = DEFAULT_EFFECT_LEVEL;
+effectLevelChangerElement.classList.add('visually-hidden');
 
 const changeEffect = (newEffect) => {
-  picture.classList.remove(`effect__preview--${currentEffect}`);
+  pictureElement.classList.remove(`effect__preview--${currentEffect}`);
   currentEffect = newEffect;
-  picture.classList.add(`effect__preview--${currentEffect}`);
-  picture.style.filter = effects[currentEffect]['open']();
+  pictureElement.classList.add(`effect__preview--${currentEffect}`);
+  pictureElement.style.filter = effects[currentEffect]['open']();
 };
 
 const onSliderUpdate = throttle(() => {
-  effectLevelValue.value = effectLevelSlider.noUiSlider.get();
+  effectLevelValueElement.value = effectLevelSliderElement.noUiSlider.get();
   if (currentEffect !== 'none') {
-    picture.style.filter = effects[currentEffect]['update']();
+    pictureElement.style.filter = effects[currentEffect]['update']();
   }
 }, SLIDER_UPDATE_DELAY);
 
@@ -123,14 +123,14 @@ const onEffectsListClick = debounce((evt) => {
 }, EFFECT_CHANGE_DELAY);
 
 const addEffectEventHandlers = () => {
-  effectLevelSlider.noUiSlider.on('update', onSliderUpdate);
-  effectsList.addEventListener('click', onEffectsListClick);
+  effectLevelSliderElement.noUiSlider.on('update', onSliderUpdate);
+  effectsListElement.addEventListener('click', onEffectsListClick);
 };
 
 const resetEffects =() => {
   changeEffect('none');
-  effectLevelValue.value = DEFAULT_EFFECT_LEVEL;
-  effectLevelChanger.classList.add('visually-hidden');
+  effectLevelValueElement.value = DEFAULT_EFFECT_LEVEL;
+  effectLevelChangerElement.classList.add('visually-hidden');
 };
 
 export {addEffectEventHandlers, resetEffects};
